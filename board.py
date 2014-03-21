@@ -22,6 +22,12 @@ class GameBoard:
     def is_cell_empty(self, loc):
         return (self.board[loc] == 0)
 
+    """
+      Sets a cell's value
+    """
+    def set_cell(self, loc, val):
+        self.board[loc] = val
+
     """ 
       Give visual representation of board with players moves 
       @returns string - string representation of board's current state
