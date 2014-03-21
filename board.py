@@ -2,7 +2,7 @@
   Class for tic tac toe game board
   Used to create the board, display it, check cells and set them
 """
-class Gameboard:
+class GameBoard:
     board = []              # Array to hold the board cells values 
     rowcols = 3             # Set the # of rows and cols (square)
     markers = {0: " "}      # Dictionary for cell value to marker 
@@ -39,5 +39,5 @@ class Gameboard:
     def reset(self):
         self.board = [0 for i in xrange(self.rowcols * self.rowcols)]
 
-board = Gameboard()
+board = GameBoard()
 print board
