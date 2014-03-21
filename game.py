@@ -17,7 +17,7 @@ players = []
 
 board = GameBoard()
 
-print board
+print "\nWelcome to the TIC-TAC-TOE game!\n"
 
 # Hard code this for now - will prompt later
 num_players = 2
@@ -31,5 +31,16 @@ while player_cnt < num_players:
     # Create player and add to player list
     players.append(Player(name))
     player_cnt += 1
+
+playing_game = True
+while playing_game:
+    print board
+
+    active_round = True
+    while active_round:
+        # Going to be handling moves
+    
+        active_round = False
    
+    playing_game = False
 
