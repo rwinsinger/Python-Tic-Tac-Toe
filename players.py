@@ -14,3 +14,18 @@ class Player:
     """
     def get_name(self):
         return self.name
+
+    """
+      Prompt for player name
+    """
+    @staticmethod
+    def get_player_name():
+        valid = False
+        while not valid:
+            name = raw_input("Name of player:")
+
+            if len(name) > 0:
+                valid = True
+
+        return name
+

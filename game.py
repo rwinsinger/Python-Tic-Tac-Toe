@@ -18,3 +18,18 @@ players = []
 board = GameBoard()
 
 print board
+
+# Hard code this for now - will prompt later
+num_players = 2
+
+player_cnt = 0
+# Prompt for player's names and then create player
+while player_cnt < num_players:
+    # Use static method to get name
+    name = Player.get_player_name()
+
+    # Create player and add to player list
+    players.append(Player(name))
+    player_cnt += 1
+   
+
