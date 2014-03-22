@@ -4,12 +4,14 @@ import re
   Base player class - used for human player. 
 """
 class Player:
-    name = ""
+    name = ""                           # Name of the player
+    game_board = False                  # Will hold pointer to game board object
     coord_match = re.compile('\d,\d')   # Regex for correct coords entry
 
     """ Constructor to initialize player """
-    def __init__(self, player_name):
+    def __init__(self, player_name, board):
         self.name = player_name
+        self.game_board = board
 
     """ 
       Getter for player name
