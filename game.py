@@ -45,6 +45,9 @@ while playing_game:
         player = players[current_player_id]
         
         print "%s's turn: Move #%d...\n" % (player.get_name(), moves)
+        
+        player.make_move()
+
         print board
 
         if (moves == 9):
