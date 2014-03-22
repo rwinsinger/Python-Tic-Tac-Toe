@@ -50,6 +50,13 @@ class Player:
             if self.coord_match.match(player_move):
                 (row, col) = player_move.split(",", 2)
                 print "Player's move is: ", row, col
-                not_valid = False
+
+                cell_offset = self.game_board.get_cell_offset(int(row),int(col))
+                if (cell_offset >= 0):
+                    self.game_board.set_cell(cell_offset, self.marker_value)
+                    not_valid = False
+                else:
+                    print "Rows and columns must be between 1 and 3"
             else:
-                print "Invalid entry, try again"
+                print "Please enter valid row number, a comma, and column number"
+
