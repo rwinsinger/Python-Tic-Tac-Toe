@@ -36,11 +36,24 @@ playing_game = True
 while playing_game:
     print board
 
-    active_round = True
-    while active_round:
-        # Going to be handling moves
-    
-        active_round = False
+    moves = 0
+    current_player_id = 0
+    active_turn = True
+    while active_turn:
+        moves += 1
+        # Grab the current player (based on id)
+        player = players[current_player_id]
+        
+        print "%s's turn: Move #%d...\n" % (player.get_name(), moves)
+        print board
+
+        if (moves == 9):
+           active_turn = False
+        else:
+            if (current_player_id == 1):
+                current_player_id = 0
+            else:
+                current_player_id = 1
    
     playing_game = False
 
