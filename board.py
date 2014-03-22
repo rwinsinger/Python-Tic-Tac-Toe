@@ -10,6 +10,10 @@ class GameBoard:
         1: "O",
         4: "X"
         }
+    poss_wins = [[1,2,3],[4,5,6],[7,8,9],
+                 [1,4,7],[2,5,8],[3,6,9],
+                 [1,5,9],[3,5,7]]
+    winner = False
    
     """ Build empty board when object is created """
     def __init__(self):
@@ -27,6 +31,23 @@ class GameBoard:
     """
     def set_cell(self, loc, val):
         self.board[loc] = val
+
+    """
+      Get a cell's value
+    """
+    def get_cell(self, loc):
+        return (self.board[loc])
+
+    """
+      Add up total of values in the cells.  This will be used to 
+      determine if a win has happened, but also to determine what plays
+      have been made
+    """
+    def sum_cells(self, cell_list):
+        total = 0
+        for cell in cell_list:
+            total += self.get_cell(cell)
+        return total
 
     """ 
       Give visual representation of board with players moves 

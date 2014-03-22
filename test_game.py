@@ -16,6 +16,19 @@ class TestGameBoard(unittest.TestCase):
         game_board.set_cell(3,1)
         self.assertFalse(game_board.is_cell_empty(3))
 
+    def test_get_cell(self):
+        game_board = GameBoard()
+        game_board.set_cell(3,1)
+        self.assertEquals(game_board.get_cell(3), 1)
+
+    def test_cell_sum(self):
+        game_board = GameBoard()
+        game_board.set_cell(1,1)
+        game_board.set_cell(2,3)
+        game_board.set_cell(3,5)
+        list = [1,2,3]
+        self.assertEquals(game_board.sum_cells(list), 9)
+
 class TestPlayer(unittest.TestCase):
     def test_player_creation(self):
         player = Player("Randy")
