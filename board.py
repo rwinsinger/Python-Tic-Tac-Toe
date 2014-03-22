@@ -39,6 +39,16 @@ class GameBoard:
         return (self.board[loc])
 
     """
+      Get a cell offset based off of row, col location
+    """
+    def get_cell_offset(self, row, col):
+        offset = -1
+        if (row in range(1,4) and col in range(1,4)):
+            offset = (3 *(row - 1)) + (col - 1)
+
+        return (offset)
+
+    """
       Add up total of values in the cells.  This will be used to 
       determine if a win has happened, but also to determine what plays
       have been made

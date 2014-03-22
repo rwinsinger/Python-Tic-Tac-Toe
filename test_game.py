@@ -21,6 +21,12 @@ class TestGameBoard(unittest.TestCase):
         game_board.set_cell(3,1)
         self.assertEquals(game_board.get_cell(3), 1)
 
+    def test_get_cell_offset(self):
+        game_board = GameBoard()
+        self.assertEquals(game_board.get_cell_offset(1,1), 0)
+        self.assertEquals(game_board.get_cell_offset(3,3), 8)
+        self.assertEquals(game_board.get_cell_offset(4,4), -1)
+
     def test_cell_sum(self):
         game_board = GameBoard()
         game_board.set_cell(1,1)
