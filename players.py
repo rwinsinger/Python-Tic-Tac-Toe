@@ -1,8 +1,11 @@
+import re
+
 """
   Base player class - used for human player. 
 """
 class Player:
     name = ""
+    coord_match = re.compile('\d,\d')   # Regex for correct coords entry
 
     """ Constructor to initialize player """
     def __init__(self, player_name):
@@ -40,6 +43,9 @@ class Player:
         while not_valid:
             player_move = raw_input("%s's Move (row,col): " % self.name)
 
-            print "Player's move is: ", player_move
-
-            not_valid = False
+            if self.coord_match.match(player_move):
+                (row, col) = player_move.split(",", 2)
+                print "Player's move is: ", row, col
+                not_valid = False
+            else:
+                print "Invalid entry, try again"
