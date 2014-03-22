@@ -5,13 +5,15 @@ import re
 """
 class Player:
     name = ""                           # Name of the player
+    marker_value = 0                    # Marker value
     game_board = False                  # Will hold pointer to game board object
     coord_match = re.compile('\d,\d')   # Regex for correct coords entry
 
     """ Constructor to initialize player """
-    def __init__(self, player_name, board):
+    def __init__(self, player_name, board, player_num):
         self.name = player_name
         self.game_board = board
+        self.marker_value = board.get_marker_value_by_id(player_num)
 
     """ 
       Getter for player name

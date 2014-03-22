@@ -32,6 +32,11 @@ class TestGameBoard(unittest.TestCase):
         self.assertEquals(game_board.get_cell_offset(3,3), 8)
         self.assertEquals(game_board.get_cell_offset(4,4), -1)
   
+    """ Various tests to verify row,col conversion is working """
+    def test_marker_valuet(self):
+        game_board = GameBoard()
+        self.assertEquals(game_board.get_marker_value_by_id(1),4)
+
     """ Test to verify sum of list of cells is correct """
     def test_cell_sum(self):
         game_board = GameBoard()
@@ -43,10 +48,15 @@ class TestGameBoard(unittest.TestCase):
 
 class TestPlayer(unittest.TestCase):
     """ Test player creation, is instance of Player object, and board is instance of GameBoard """
-    def test_player_creation(self):
+    def test_player(self):
         game_board = GameBoard()
-        player = Player("Randy",game_board)
+        player = Player("Randy",game_board,0)
         name = player.name
+
+        # Test name was set
         self.assertEqual(name,"Randy")
+        # Test board is instance of GameBoard
         self.assertIsInstance(player.game_board,GameBoard)
+        # Test player (id of 0) has marker value of 1
+        self.assertEquals(player.marker_value, 1)
 

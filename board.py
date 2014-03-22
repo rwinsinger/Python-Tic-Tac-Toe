@@ -10,6 +10,7 @@ class GameBoard:
         1: "O",
         4: "X"
         }
+    marker_values = [1,4]
     poss_wins = [[1,2,3],[4,5,6],[7,8,9],
                  [1,4,7],[2,5,8],[3,6,9],
                  [1,5,9],[3,5,7]]
@@ -58,6 +59,12 @@ class GameBoard:
         for cell in cell_list:
             total += self.get_cell(cell)
         return total
+
+    """
+      Get the marker value for the given id
+    """
+    def get_marker_value_by_id(self, id):
+        return(self.marker_values[id])
 
     """ 
       Give visual representation of board with players moves 

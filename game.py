@@ -29,7 +29,7 @@ while player_cnt < num_players:
     name = Player.get_player_name()
 
     # Create player and add to player list
-    players.append(Player(name, board))
+    players.append(Player(name, board, player_cnt))
     player_cnt += 1
 
 playing_game = True
