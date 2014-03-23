@@ -53,8 +53,11 @@ class Player:
 
                 cell_offset = self.game_board.get_cell_offset(int(row),int(col))
                 if (cell_offset >= 0):
-                    self.game_board.set_cell(cell_offset, self.marker_value)
-                    not_valid = False
+                    if (self.game_board.is_cell_empty(cell_offset)):
+                        self.game_board.set_cell(cell_offset, self.marker_value)
+                        not_valid = False
+                    else:
+                        print "That spot is already taken, please try again..."
                 else:
                     print "Rows and columns must be between 1 and 3"
             else:
