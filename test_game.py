@@ -46,6 +46,15 @@ class TestGameBoard(unittest.TestCase):
         list = [1,2,3]
         self.assertEquals(game_board.sum_cells(list), 9)
 
+    """ Test to verify check_for_win. Try when board empty, then when has winning combo """
+    def test_cell_sum(self):
+        game_board = GameBoard()
+        self.assertFalse(game_board.check_for_win())
+        game_board.set_cell(2,1)
+        game_board.set_cell(4,1)
+        game_board.set_cell(6,1)
+        self.assertTrue(game_board.check_for_win())
+
 class TestPlayer(unittest.TestCase):
     """ Test player creation, is instance of Player object, and board is instance of GameBoard """
     def test_player(self):

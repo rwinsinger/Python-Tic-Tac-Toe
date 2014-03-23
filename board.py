@@ -57,7 +57,7 @@ class GameBoard:
     def sum_cells(self, cell_list):
         total = 0
         for cell in cell_list:
-            total += self.get_cell(cell)
+            total += self.get_cell(cell-1)
         return total
 
     """
@@ -65,6 +65,22 @@ class GameBoard:
     """
     def get_marker_value_by_id(self, id):
         return(self.marker_values[id])
+
+    """
+      Checks for a winning line by looping through each possible winning combination and 
+      summing up the values of the cells.  If value is 3, then first player is winner.
+      If value is 12, then second player is the winner.
+    """
+    def check_for_win(self):
+        game_won = False
+        for win_combo in self.poss_wins:
+            cells_total = self.sum_cells(win_combo)
+            print "Win check: ",win_combo, cells_total
+            if (cells_total == 3) or (cells_total == 12):
+                game_won = True
+                break
+
+        return game_won
 
     """ 
       Give visual representation of board with players moves 
