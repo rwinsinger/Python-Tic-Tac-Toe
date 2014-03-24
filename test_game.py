@@ -1,6 +1,6 @@
 import unittest
 from board import GameBoard
-from players import Player
+from players import Player, ComputerPlayer
 
 class TestGameBoard(unittest.TestCase):
     """ Test game board creation and is instance of that object """
@@ -87,4 +87,32 @@ class TestPlayer(unittest.TestCase):
         self.assertIsInstance(player.game_board,GameBoard)
         # Test player (id of 0) has marker value of 1
         self.assertEquals(player.marker_value, 1)
+
+class TestComputerPlayer(unittest.TestCase):
+    """ 
+        Test computer player creation, is instance of ComputerPlayer object, 
+        and board is instance of GameBoard 
+    """
+    def test_computer_player(self):
+        game_board = GameBoard()
+        computerplayer = ComputerPlayer("Computer",game_board,1)
+        name = computerplayer.name
+
+        # Test name was set
+        self.assertEqual(name,"Computer")
+
+        # Test board is instance of GameBoard
+        self.assertIsInstance(computerplayer.game_board,GameBoard)
+        # Test player (id of 1) has marker value of 4
+        self.assertEquals(computerplayer.marker_value, 4)
+        # Make the first move
+        computerplayer.make_move()
+        self.assertFalse(game_board.is_cell_empty(5))
+        # Make the another move
+        computerplayer.make_move()
+        self.assertFalse(game_board.is_cell_empty(1))
+        # Make the third move
+        computerplayer.make_move()
+        self.assertFalse(game_board.is_cell_empty(9))
+        self.assertTrue(game_board.check_for_win())
 

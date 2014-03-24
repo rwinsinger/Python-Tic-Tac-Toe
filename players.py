@@ -65,3 +65,66 @@ class Player:
             else:
                 print "Please enter valid row number, a comma, and column number"
 
+
+"""
+  Computer player class - used for the computer player. 
+"""
+class ComputerPlayer(Player):
+    check_cell_order = [5, 1, 3, 7, 9, 2, 4, 6, 8]
+    first_move = True
+
+    """
+      Handle a computer player's move. Will determine the move based on state 
+      of game board.  It will check to see if there is an opportunity to win 
+      or a need to block.  If not, will play strategic locations first.
+    """
+    def make_move(self):
+        made_move = False
+
+        # If not the first move, loop through possible win combinations
+        # and try to first find a combo that is one play away from win.
+        if not self.first_move:
+            to_win = []
+            to_block = []
+            for win_combo in self.game_board.poss_wins:
+                total = self.game_board.sum_cells(win_combo)
+                print "Sum:", total, win_combo
+                
+                # Check if possible win for computer (8) or possible
+                # win for other player (2).
+                if total == 8:
+                    to_win.append(win_combo)
+                    break
+                elif total == 2:
+                    to_block.append(win_combo)
+
+            if len(to_win):
+                cell_list = to_win.pop(0)
+
+                # Get the empty cell
+                cell = self.game_board.get_empty_cell(win_combo)
+                # Play on that cell for win
+                self.game_board.set_cell(cell, self.marker_value)
+                made_move = True
+            elif len(to_block):
+                cell_list = to_block.pop(0)
+
+                # Get the empty cell
+                cell = self.game_board.get_empty_cell(cell_list)
+
+                # Play on that cell for block
+                self.game_board.set_cell(cell, self.marker_value)
+                made_move = True
+
+        # If first move or not part of combos
+        if not made_move:
+            # Loop through cells in specific order - play if cell is empty
+            # Order is middle cell, corners, then other cells
+            for cell in self.check_cell_order:
+                # if cell is empty, set it
+                if self.game_board.is_cell_empty(cell):
+                    # Play on that cell                    
+                    print "Empty cell:",cell
+                    self.game_board.set_cell(cell, self.marker_value)
+                    self.first_move = False
+                    break
