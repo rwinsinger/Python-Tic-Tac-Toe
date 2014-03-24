@@ -1,5 +1,25 @@
+import re
 from board import GameBoard
 from players import Player
+
+"""
+  Prompt user for number of human players
+"""
+def get_num_humans():
+    input_check = re.compile('[2]')
+
+    valid = False
+    while not valid:
+        # Get input from user
+        num_humans = raw_input()
+       
+        # Check for valid input
+        if (input_check.match(num_humans)):
+            valid = True
+        else:
+            print "Please enter the number 2..."
+
+    return int(num_humans)
 
 """
   This is the main logic for the game.  It will:
@@ -11,7 +31,6 @@ from players import Player
     - check for winner and display winner name or tie if game over
     - prompt to see if they want to play again
 """
-
 # Create array to hold players
 players = []
 
@@ -20,7 +39,7 @@ board = GameBoard()
 print "\nWelcome to the TIC-TAC-TOE game!\n"
 
 # Hard code this for now - will prompt later
-num_players = 2
+num_players = get_num_humans() 
 
 player_cnt = 0
 # Prompt for player's names and then create player
