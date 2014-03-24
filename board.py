@@ -67,7 +67,7 @@ class GameBoard:
     def get_empty_cell(self, cell_list):
         # Loop through each cell on thelist
         for cell in cell_list:
-            if self.is_cell_empty(cell) == 0:
+            if self.is_cell_empty(cell):
                 break
         return cell
 
