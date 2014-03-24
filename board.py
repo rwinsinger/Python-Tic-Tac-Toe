@@ -25,19 +25,19 @@ class GameBoard:
       @returns boolean - true if value is 0, false if not 0
     """
     def is_cell_empty(self, loc):
-        return (self.board[loc] == 0)
+        return (self.board[loc-1] == 0)
 
     """
       Sets a cell's value
     """
     def set_cell(self, loc, val):
-        self.board[loc] = val
+        self.board[loc-1] = val
 
     """
       Get a cell's value
     """
     def get_cell(self, loc):
-        return (self.board[loc])
+        return (self.board[loc-1])
 
     """
       Get a cell offset based off of row, col location
@@ -45,7 +45,7 @@ class GameBoard:
     def get_cell_offset(self, row, col):
         offset = -1
         if (row in range(1,4) and col in range(1,4)):
-            offset = (3 *(row - 1)) + (col - 1)
+            offset = (3 *(row - 1)) + (col)
 
         return (offset)
 
@@ -57,7 +57,7 @@ class GameBoard:
     def sum_cells(self, cell_list):
         total = 0
         for cell in cell_list:
-            total += self.get_cell(cell-1)
+            total += self.get_cell(cell)
         return total
 
     """
@@ -67,7 +67,7 @@ class GameBoard:
     def get_empty_cell(self, cell_list):
         # Loop through each cell on thelist
         for cell in cell_list:
-            if self.is_cell_empty(cell-1) == 0:
+            if self.is_cell_empty(cell) == 0:
                 break
         return cell
 
@@ -109,13 +109,13 @@ class GameBoard:
 
         # Loop through rows and columns, building board and showing
         # cell values (if any)
-        idx = 0
+        cell = 1
         for row in range(self.rowcols):
             display += "  " + h_char*13 + "\n"
             display += str(row + 1) +" | " 
             for col in range(self.rowcols):
-                display += self.markers[self.board[idx]] + " | "
-                idx += 1
+                display += self.markers[self.get_cell(cell)] + " | "
+                cell += 1
 
             display += "\n"
 

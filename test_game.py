@@ -1,6 +1,6 @@
 import unittest
 from board import GameBoard
-from players import Player, ComputerPlayer
+from players import Player
 
 class TestGameBoard(unittest.TestCase):
     """ Test game board creation and is instance of that object """
@@ -28,8 +28,8 @@ class TestGameBoard(unittest.TestCase):
     """ Various tests to verify row,col conversion is working """
     def test_get_cell_offset(self):
         game_board = GameBoard()
-        self.assertEquals(game_board.get_cell_offset(1,1), 0)
-        self.assertEquals(game_board.get_cell_offset(3,3), 8)
+        self.assertEquals(game_board.get_cell_offset(1,1), 1)
+        self.assertEquals(game_board.get_cell_offset(3,3), 9)
         self.assertEquals(game_board.get_cell_offset(4,4), -1)
   
     """ Various tests to verify get marker by id method is working """
@@ -53,9 +53,9 @@ class TestGameBoard(unittest.TestCase):
     def test_cell_sum(self):
         game_board = GameBoard()
         self.assertFalse(game_board.check_for_win())
-        game_board.set_cell(2,1)
-        game_board.set_cell(4,1)
-        game_board.set_cell(6,1)
+        game_board.set_cell(3,1)
+        game_board.set_cell(5,1)
+        game_board.set_cell(7,1)
         self.assertTrue(game_board.check_for_win())
 
     """
@@ -63,12 +63,12 @@ class TestGameBoard(unittest.TestCase):
     """
     def test_find_empty_cell(self):
         game_board = GameBoard()
-        game_board.set_cell(0,1)
         game_board.set_cell(1,1)
-        cell_list = [0,1,2]
+        game_board.set_cell(2,1)
+        cell_list = [1,2,3]
         cell = game_board.get_empty_cell(cell_list)
         print game_board
-        self.assertTrue(cell,2)
+        self.assertTrue(cell,3)
 
 
 class TestPlayer(unittest.TestCase):

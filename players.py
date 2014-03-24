@@ -23,7 +23,8 @@ class Player:
         return self.name
 
     """
-      Prompt for player name. Loops until something is entered and then returns the name
+      Prompt for player name. Loops until something is entered and then returns 
+      the name
       @returns string - name entered 
     """
     @staticmethod
@@ -38,7 +39,8 @@ class Player:
         return name
 
     """
-      Handle a player's move. Will prompt for row, col of cell, validate, verify cell is available
+      Handle a player's move. Will prompt for row, col of cell, validate, 
+      verify cell is available
       and set cell or return error message
     """
     def make_move(self):
@@ -52,7 +54,7 @@ class Player:
                 print "Player's move is: ", row, col
 
                 cell_offset = self.game_board.get_cell_offset(int(row),int(col))
-                if (cell_offset >= 0):
+                if (cell_offset >= 1):
                     if (self.game_board.is_cell_empty(cell_offset)):
                         self.game_board.set_cell(cell_offset, self.marker_value)
                         not_valid = False
