@@ -50,13 +50,24 @@ while playing_game:
 
         print board
 
-        if (moves == 9):
-           active_turn = False
+        if moves > 4 and board.check_for_win():
+            # If win combo was found, set to winner
+            board.winner = player
+            active_turn = False
+        elif (moves == 9):
+            # If max # of moves, done with game
+            active_turn = False
         else:
+            # Move to the next player
             if (current_player_id == 1):
                 current_player_id = 0
             else:
                 current_player_id = 1
-   
+
+    if (board.winner):
+        print "The WINNER is %s!" % board.winner.get_name()
+    else:
+        print "It was a TIE game!"
+
     playing_game = False
 
