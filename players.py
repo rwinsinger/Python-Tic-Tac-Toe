@@ -70,8 +70,21 @@ class Player:
   Computer player class - used for the computer player. 
 """
 class ComputerPlayer(Player):
+    # Same list as board win list, but in different order to aid in picking
+    # next move.  Looks at possible wins with corners before middle ones
+    poss_wins_adjusted = [[1,2,3],[7,8,9],[1,4,7],[3,6,9],
+                          [1,5,9],[3,5,7],[4,5,6],[2,5,8]]
     check_cell_order = [5, 1, 3, 7, 9, 2, 4, 6, 8]
     first_move = True
+
+    """
+      Goes through the list, first checking to see in list what cells are
+      empty - checks first, then last, then middle
+    """
+    def get_best_empty_cell(self, cell_list):
+        for cell in [0,2,1]:
+            if (self.game_board.is_cell_empty(cell_list[cell])):
+                return (cell_list[cell])
 
     """
       Handle a computer player's move. Will determine the move based on state 
@@ -86,17 +99,21 @@ class ComputerPlayer(Player):
         if not self.first_move:
             to_win = []
             to_block = []
-            for win_combo in self.game_board.poss_wins:
+            to_play = []
+            for win_combo in self.poss_wins_adjusted:
                 total = self.game_board.sum_cells(win_combo)
-                print "Sum:", total, win_combo
                 
-                # Check if possible win for computer (8) or possible
-                # win for other player (2).
+                # Check for win - will add to win list and break
+                # Checks for needed block - will add list to block list
+                # Checks for area that is empty except for one of
+                #   its own markers - will add to the play list
                 if total == 8:
                     to_win.append(win_combo)
                     break
                 elif total == 2:
                     to_block.append(win_combo)
+                elif total == 4:
+                    to_play.append(win_combo)
 
             if len(to_win):
                 # If there is a possible win - play in empty cell
@@ -104,6 +121,7 @@ class ComputerPlayer(Player):
 
                 # Get the empty cell
                 cell = self.game_board.get_empty_cell(win_combo)
+
                 # Play on that cell for win
                 self.game_board.set_cell(cell, self.marker_value)
                 made_move = True
@@ -117,6 +135,17 @@ class ComputerPlayer(Player):
                 # Play on that cell for block
                 self.game_board.set_cell(cell, self.marker_value)
                 made_move = True
+            elif len(to_play):
+                # If there is one already with computer's marker value
+                # then play in best empty cell (first or last)
+                cell_list = to_play.pop(0)
+
+                # Get the best empty cell
+                cell = self.get_best_empty_cell(cell_list)
+
+                # Play on that cell for block
+                self.game_board.set_cell(cell, self.marker_value)
+                made_move = True
 
         # If first move or not part of combos
         if not made_move:
@@ -126,7 +155,6 @@ class ComputerPlayer(Player):
                 # if cell is empty, set it
                 if self.game_board.is_cell_empty(cell):
                     # Play on that cell                    
-                    print "Empty cell:",cell
                     self.game_board.set_cell(cell, self.marker_value)
                     self.first_move = False
                     break

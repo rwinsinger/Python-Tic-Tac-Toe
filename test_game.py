@@ -91,7 +91,7 @@ class TestPlayer(unittest.TestCase):
 class TestComputerPlayer(unittest.TestCase):
     """ 
         Test computer player creation, is instance of ComputerPlayer object, 
-        and board is instance of GameBoard 
+        and board is instance of GameBoard. Also test some computer moves
     """
     def test_computer_player(self):
         game_board = GameBoard()
@@ -115,4 +115,32 @@ class TestComputerPlayer(unittest.TestCase):
         computerplayer.make_move()
         self.assertFalse(game_board.is_cell_empty(9))
         self.assertTrue(game_board.check_for_win())
+
+    """ 
+        Test computer player's method that finds the best empty cell
+        in a list.  Should start with first, then last, then middle
+        in the list.
+    """
+    def test_computer_player(self):
+        game_board = GameBoard()
+        computerplayer = ComputerPlayer("Computer",game_board,1)
+        name = computerplayer.name
+
+        # Set first two cells and should return last cell
+        game_board.set_cell(1,4)
+        game_board.set_cell(2,4)
+
+        cell_list = [1,2,3]
+
+        cell = computerplayer.get_best_empty_cell(cell_list)
+        self.assertEquals(cell,3)
+
+        # Set last two cells and should return first cell
+        game_board.set_cell(5,4)
+        game_board.set_cell(6,4)
+
+        cell_list = [4,5,6]
+
+        cell = computerplayer.get_best_empty_cell(cell_list)
+        self.assertEquals(cell,4)
 
