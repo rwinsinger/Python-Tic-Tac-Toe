@@ -61,6 +61,17 @@ class GameBoard:
         return total
 
     """
+      Get the first cell in passed list that is empty 
+      @returns integer - location of cell in array (1-9)
+    """
+    def get_empty_cell(self, cell_list):
+        # Loop through each cell on thelist
+        for cell in cell_list:
+            if self.is_cell_empty(cell-1) == 0:
+                break
+        return cell
+
+    """
       Get the marker value for the given id
     """
     def get_marker_value_by_id(self, id):

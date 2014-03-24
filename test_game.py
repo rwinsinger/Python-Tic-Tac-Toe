@@ -1,6 +1,6 @@
 import unittest
 from board import GameBoard
-from players import Player
+from players import Player, ComputerPlayer
 
 class TestGameBoard(unittest.TestCase):
     """ Test game board creation and is instance of that object """
@@ -32,7 +32,7 @@ class TestGameBoard(unittest.TestCase):
         self.assertEquals(game_board.get_cell_offset(3,3), 8)
         self.assertEquals(game_board.get_cell_offset(4,4), -1)
   
-    """ Various tests to verify row,col conversion is working """
+    """ Various tests to verify get marker by id method is working """
     def test_marker_valuet(self):
         game_board = GameBoard()
         self.assertEquals(game_board.get_marker_value_by_id(1),4)
@@ -43,10 +43,13 @@ class TestGameBoard(unittest.TestCase):
         game_board.set_cell(1,1)
         game_board.set_cell(2,3)
         game_board.set_cell(3,5)
-        list = [1,2,3]
-        self.assertEquals(game_board.sum_cells(list), 9)
+        cell_list = [1,2,3]
+        self.assertEquals(game_board.sum_cells(cell_list), 9)
 
-    """ Test to verify check_for_win. Try when board empty, then when has winning combo """
+    """ 
+        Test to verify check_for_win. Try when board empty, then when has 
+        winning combo 
+    """
     def test_cell_sum(self):
         game_board = GameBoard()
         self.assertFalse(game_board.check_for_win())
@@ -55,8 +58,24 @@ class TestGameBoard(unittest.TestCase):
         game_board.set_cell(6,1)
         self.assertTrue(game_board.check_for_win())
 
+    """
+        Test method that finds empty cell in list of cells
+    """
+    def test_find_empty_cell(self):
+        game_board = GameBoard()
+        game_board.set_cell(0,1)
+        game_board.set_cell(1,1)
+        cell_list = [0,1,2]
+        cell = game_board.get_empty_cell(cell_list)
+        print game_board
+        self.assertTrue(cell,2)
+
+
 class TestPlayer(unittest.TestCase):
-    """ Test player creation, is instance of Player object, and board is instance of GameBoard """
+    """ 
+        Test player creation, is instance of Player object, and board is 
+        instance of GameBoard 
+    """
     def test_player(self):
         game_board = GameBoard()
         player = Player("Randy",game_board,0)
