@@ -1,13 +1,13 @@
 import re
 from random import randint
 from board import GameBoard
-from players import Player
+from players import Player, ComputerPlayer
 
 """
   Prompt user for number of human players
 """
 def get_num_humans():
-    input_check = re.compile('[2]')
+    input_check = re.compile('[12]')
 
     valid = False
     while not valid:
@@ -18,7 +18,7 @@ def get_num_humans():
         if (input_check.match(num_humans)):
             valid = True
         else:
-            print "Please enter the number 2..."
+            print "Please enter the number 1 or 2..."
 
     return int(num_humans)
 
@@ -62,6 +62,9 @@ while player_cnt < num_players:
     # Create player and add to player list
     players.append(Player(name, board, player_cnt))
     player_cnt += 1
+
+if len(players) == 1:
+    players.append(ComputerPlayer("Computer", board, player_cnt))
 
 playing_game = True
 while playing_game:

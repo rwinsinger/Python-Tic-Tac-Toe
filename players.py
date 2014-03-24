@@ -99,6 +99,7 @@ class ComputerPlayer(Player):
                     to_block.append(win_combo)
 
             if len(to_win):
+                # If there is a possible win - play in empty cell
                 cell_list = to_win.pop(0)
 
                 # Get the empty cell
@@ -107,6 +108,7 @@ class ComputerPlayer(Player):
                 self.game_board.set_cell(cell, self.marker_value)
                 made_move = True
             elif len(to_block):
+                # If there is a need to block - play in empty cell
                 cell_list = to_block.pop(0)
 
                 # Get the empty cell
