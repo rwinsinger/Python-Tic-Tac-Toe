@@ -1,4 +1,5 @@
 import re
+from random import randint
 from board import GameBoard
 from players import Player
 
@@ -11,7 +12,7 @@ def get_num_humans():
     valid = False
     while not valid:
         # Get input from user
-        num_humans = raw_input()
+        num_humans = raw_input("Number of Human Players (1 or 2): ")
        
         # Check for valid input
         if (input_check.match(num_humans)):
@@ -20,6 +21,17 @@ def get_num_humans():
             print "Please enter the number 2..."
 
     return int(num_humans)
+
+"""
+  Take the players array and based on random number, reorder the players
+"""
+def set_play_order(players):
+    # Randomly get number 1 or 2
+    whos_first = randint(1,2)
+
+    # If number was 2, we want to reverse the player's order
+    if (whos_first == 2):
+        players.reverse()
 
 """
   This is the main logic for the game.  It will:
@@ -53,6 +65,11 @@ while player_cnt < num_players:
 
 playing_game = True
 while playing_game:
+    # Randomly select first player
+    set_play_order(players)
+
+    print "\nMATCH: %s vs. %s\n" % (players[0].get_name(), players[1].get_name())
+
     print board
 
     moves = 0
