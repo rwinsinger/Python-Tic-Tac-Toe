@@ -10,11 +10,12 @@ class GameBoard:
         1: "O",
         4: "X"
         }
-    marker_values = [1,4]
+    marker_values = [1,4]   # Values to use for the two players
+                            # List of winning cell combinations
     poss_wins = [[1,2,3],[4,5,6],[7,8,9],
                  [1,4,7],[2,5,8],[3,6,9],
                  [1,5,9],[3,5,7]]
-    winner = False
+    winner = False          # Will hold player that wins
    
     """ Build empty board when object is created """
     def __init__(self):
@@ -22,6 +23,7 @@ class GameBoard:
 
     """
       Checks to see if cell is empty
+      @params  integer - location of cell to check
       @returns boolean - true if value is 0, false if not 0
     """
     def is_cell_empty(self, loc):
@@ -29,18 +31,25 @@ class GameBoard:
 
     """
       Sets a cell's value
+      @params  integer - location of cell to set
+               integer - value to set
     """
     def set_cell(self, loc, val):
         self.board[loc-1] = val
 
     """
       Get a cell's value
+      @params  integer - location of cell to get
+      @returns integer - value retrieved from cell
     """
     def get_cell(self, loc):
         return (self.board[loc-1])
 
     """
       Get a cell offset based off of row, col location
+      @params  integer - row of board
+               integer - column of board
+      @returns integer - location of cell 
     """
     def get_cell_offset(self, row, col):
         offset = -1
@@ -53,6 +62,8 @@ class GameBoard:
       Add up total of values in the cells.  This will be used to 
       determine if a win has happened, but also to determine what plays
       have been made
+      @params  array   - list of cells
+      @returns integer - sum of the values of cells in the list
     """
     def sum_cells(self, cell_list):
         total = 0
@@ -62,6 +73,7 @@ class GameBoard:
 
     """
       Get the first cell in passed list that is empty 
+      @params  array   - list of cells
       @returns integer - location of cell in array (1-9)
     """
     def get_empty_cell(self, cell_list):
@@ -73,20 +85,26 @@ class GameBoard:
 
     """
       Get the marker value for the given id
+      @params  integer - player id (0 or 1)
+      @returns integer - value for that player
     """
     def get_marker_value_by_id(self, id):
         return(self.marker_values[id])
 
     """
-      Checks for a winning line by looping through each possible winning combination and 
-      summing up the values of the cells.  If value is 3, then first player is winner.
-      If value is 12, then second player is the winner.
+      Checks for a winning line by looping through each possible winning 
+      combination and summing up the values of the cells.  If value is 3, 
+      then first player is winner.  If value is 12, then second player 
+      is the winner.
+      @returns boolean - True if game one, false if not
     """
     def check_for_win(self):
         game_won = False
         for win_combo in self.poss_wins:
             cells_total = self.sum_cells(win_combo)
-            print "Win check: ",win_combo, cells_total
+
+            # if totals are sum of first player or second player values
+            # then we have a win.
             if (cells_total == 3) or (cells_total == 12):
                 game_won = True
                 break

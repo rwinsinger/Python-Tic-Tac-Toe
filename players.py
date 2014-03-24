@@ -40,8 +40,7 @@ class Player:
 
     """
       Handle a player's move. Will prompt for row, col of cell, validate, 
-      verify cell is available
-      and set cell or return error message
+      verify cell is available and set cell or return error message
     """
     def make_move(self):
         not_valid = True
@@ -51,10 +50,11 @@ class Player:
 
             if self.coord_match.match(player_move):
                 (row, col) = player_move.split(",", 2)
-                print "Player's move is: ", row, col
 
+                # Get cell location base on row, col
                 cell_offset = self.game_board.get_cell_offset(int(row),int(col))
                 if (cell_offset >= 1):
+                    # If empty, set the cell
                     if (self.game_board.is_cell_empty(cell_offset)):
                         self.game_board.set_cell(cell_offset, self.marker_value)
                         not_valid = False
@@ -80,6 +80,8 @@ class ComputerPlayer(Player):
     """
       Goes through the list, first checking to see in list what cells are
       empty - checks first, then last, then middle
+      @params  array   - list of cells to be evaluated
+      @returns integer - location of empty cell
     """
     def get_best_empty_cell(self, cell_list):
         for cell in [0,2,1]:

@@ -63,6 +63,7 @@ while player_cnt < num_players:
     players.append(Player(name, board, player_cnt))
     player_cnt += 1
 
+# If only one human player, will need to add a computer player.  
 if len(players) == 1:
     players.append(ComputerPlayer("Computer", board, player_cnt))
 
@@ -104,9 +105,9 @@ while playing_game:
                 current_player_id = 1
 
     if (board.winner):
-        print "The WINNER is %s!" % board.winner.get_name()
+        print "The WINNER is %s!\n" % board.winner.get_name()
     else:
-        print "It was a TIE game!"
+        print "It was a TIE game!\n"
 
     playing_game = False
 
