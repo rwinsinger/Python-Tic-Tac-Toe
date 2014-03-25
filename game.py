@@ -7,7 +7,7 @@ from players import Player, ComputerPlayer
   Prompt user for number of human players
 """
 def get_num_humans():
-    input_check = re.compile('^[12]%')
+    input_check = re.compile('^[12]$')
 
     valid = False
     while not valid:
@@ -21,6 +21,27 @@ def get_num_humans():
             print "Please enter the number 1 or 2..."
 
     return int(num_humans)
+
+"""
+  Prompt user if they want to play again 
+"""
+def play_another_game():
+    input_check = re.compile('^[YyNn]$')
+
+    valid = False
+    while not valid:
+        # Get input from user
+        play_again = raw_input("Would you like to play again (Y/N)? ")
+       
+        # Check for valid input
+        if (input_check.match(play_again)):
+            valid = True
+            if play_again.upper() == 'N':
+                return False
+            else:
+                return True
+        else:
+            print "Please enter a Y or N..."
 
 """
   Take the players array and based on random number, reorder the players
@@ -109,5 +130,8 @@ while playing_game:
     else:
         print "It was a TIE game!\n"
 
-    playing_game = False
+    if not play_another_game():
+        playing_game = False
+    else:
+        board.reset()
 
