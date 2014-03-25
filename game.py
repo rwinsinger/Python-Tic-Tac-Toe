@@ -7,7 +7,7 @@ from players import Player, ComputerPlayer
   Prompt user for number of human players
 """
 def get_num_humans():
-    input_check = re.compile('[12]')
+    input_check = re.compile('^[12]%')
 
     valid = False
     while not valid:
@@ -72,7 +72,7 @@ while playing_game:
     # Randomly select first player
     set_play_order(players)
 
-    print "\nMATCH: %s vs. %s\n" % (players[0].get_name(), players[1].get_name())
+    print "\nMATCH: %s vs. %s" % (players[0].get_name(), players[1].get_name())
 
     print board
 
@@ -84,7 +84,7 @@ while playing_game:
         # Grab the current player (based on id)
         player = players[current_player_id]
         
-        print "%s's turn: Move #%d...\n" % (player.get_name(), moves)
+        print "%s's turn: Move #%d..." % (player.get_name(), moves)
         
         player.make_move()
 

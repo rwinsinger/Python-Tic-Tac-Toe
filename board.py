@@ -120,7 +120,7 @@ class GameBoard:
         v_char = '|'
 
         # Print top numbers
-        display = " "
+        display = "\n "
         for x in range(self.rowcols):
             display += "   " + str(x + 1)
         display += "\n"
