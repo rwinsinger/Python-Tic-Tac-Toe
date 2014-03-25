@@ -1,3 +1,54 @@
+This ia a simple example of a command line based Tic-Tac-Toe game written
+in python (version 2.7.5).  It provides a way for two human players to 
+play against each other or for a human to play against the computer.  
+The computer should either win or tie, but never lose.
+
+To run, type:
+   python game.py
+
+I designed this application to have a GameBoard class to handle interation
+and display of the game board, a Player class to work with the human players,
+and ComputerPlayer class (child class of Player) to provide the logic for
+automated plays.  
+
+The board is stored in an one-dimensional array with 9 cells.  The array is 
+zero-based but it is easier to think of the cells as 1 through 9 - so the
+methods for the board will handle the converting to zero-based structure.
+The players enter their plays with row, col coordinates, so the board 
+methods will also handle that conversion.
+
+Although it wasn't part of the requirements, I made the game to work with
+two human players or a human against the computer.  This allowed me to 
+test some of the functionality and strategy before implementing the computer
+player.  One player uses the value of 1 for their cells and the other player
+uses a value of 4.  This way we can add up cells that would contain a winning
+path and determine a win if the total is 3 or 12, or ones that we need to
+play in to block or win (2 and 8 respectively), or just find those that have 
+two empty cells and one cell set.  
+
+The computer first looks for ways to win, then block.  It then looks to find
+those paths where only one cell is set with it's value.  If none of those 
+are found, it tries to set the center cell, then corners, then other cells.
+I have not been able to beat the computer through my testing.
+
+There are many ways to write this application and this one definitely could
+be improved.  It could be optimized by reducing the winning paths we check as
+we find that they have both player's values in them.  We could add logging
+in memory or in a database to keep track of wins/losses and report those.
+
+I try to comment things well - not just for others, but so I can understand
+what I was thinking when I wrote something.
+
+There was TDD used in development of this application.  It uses python nose
+for this testing.  To get this to work, first install nose:
+   pip install nose
+To run the tests:
+   python test_game.py
+
+Enjoy! - Randy
+
+--- Originally from Cox
+
 Intructions:
 1. Fork this repo on GitHub
 2. Create a program that can interactively play the game of Tic-Tac-Toe against a human player and never lose.
